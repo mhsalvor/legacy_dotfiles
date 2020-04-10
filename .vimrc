@@ -13,7 +13,7 @@
 " Feel free to use and modify all or some part of it,
 " just remeber: I am not responsible if this breakes your OS or Machine!
 "
-"" by: Giuseppe (mhsalvor) Molinaro g.molianro _at_ gmx.com
+"" by: Giuseppe (mhsalvor) Molinaro g.molinaro@linuxmail.org
 "
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -50,30 +50,30 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 "end
 
-Plugin 'tpope/vim-fugitive'
+"Plugin 'tpope/vim-fugitive'
 
 Plugin 'itchyny/Lightline.vim'	" Lightline statusbar
-Plugin 'francoiscabrol/ranger.vim' "Ranger integration in vim and neovim 
+"Plugin 'francoiscabrol/ranger.vim' "Ranger integration in vim and neovim 
 Plugin 'scrooloose/nerdtree' " nerdtree
 Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plugin 'ryanoasis/vim-devicons'
-Plugin 'vim-python/python-syntax'
-Plugin 'jreybert/vimagit'
-Plugin 'severin-lemaignan/vim-minimap'
+"Plugin 'ryanoasis/vim-devicons'
+"Plugin 'vim-python/python-syntax'
+"Plugin 'jreybert/vimagit'
+"Plugin 'severin-lemaignan/vim-minimap'
 Plugin 'ap/vim-css-color' " CSS color preview
-Plugin 'tpope/vim-surround' " Change surrounding marks
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'hsitz/VimOrganizer' " Org Mode in Vim!
-"
-Plugin 'jremmen/vim-ripgrep' "fast grep
-Plugin 'leafgarland/typescript-vim' " typescript file highlights
-Plugin 'vim-utils/vim-man'
-Plugin 'lyuts/vim-rtags' " C++ rtags
+"Plugin 'tpope/vim-surround' " Change surrounding marks
+"Plugin 'tpope/vim-repeat'
+"Plugin 'tpope/vim-commentary'
+"Plugin 'tpope/vim-unimpaired'
+"Plugin 'hsitz/VimOrganizer' " Org Mode in Vim!
+Plugin  'kovetskiy/sxhkd-vim' "sxhkd syntax and indentetion
+"Plugin 'jremmen/vim-ripgrep' "fast grep
+"Plugin 'leafgarland/typescript-vim' " typescript file highlights
+"Plugin 'vim-utils/vim-man'
+"Plugin 'lyuts/vim-rtags' " C++ rtags
 "Plugin 'ycm-core/YouCompleteMe' " disabled: having problems with Python
-Plugin 'kien/ctrlp.vim'
-Plugin 'mbbill/undotree'
+"Plugin 'kien/ctrlp.vim'
+"Plugin 'mbbill/undotree'
 
 if iCanHazVundle == 0
     echo "Installing Vundles, please ignore key map error messages"

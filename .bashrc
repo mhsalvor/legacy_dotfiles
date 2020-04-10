@@ -18,7 +18,7 @@
 # Feel free to use and modify all or some part of it,
 # just remeber: I am not responsible if this breakes your OS or Machine!
 #
-## by: Giuseppe (mhsalvor) Molinaro g.molianro _at_ gmx.com
+## by: Giuseppe (mhsalvor) Molinaro g.molinaro@linuxmail.org
 #
 #
 
