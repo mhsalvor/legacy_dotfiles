@@ -324,7 +324,7 @@ let g:minimap_highlight='Visual'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "let g:hybrid_use_Xresources = 1
 "colorscheme hybrid
-"colo default " use the default colorscheme
+colo default " use the default colorscheme
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mouse
@@ -332,7 +332,7 @@ let g:minimap_highlight='Visual'
 " mouse scrolling
 set mouse=a
 
-" Fixes muse issues using Alacritty terminal
+" Fixes mouse issues using Alacritty terminal
 set ttymouse=sgr
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -406,3 +406,4 @@ set nrformats-=octal
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set spelllang=it
 
+""EOF""

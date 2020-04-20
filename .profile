@@ -40,3 +40,5 @@ export NUMJOBS="-j$njobs"
 #export QT_SELECT=4
 
 export TERMINAL="sterminal"
+
+##EOF##

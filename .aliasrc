@@ -71,8 +71,8 @@ alias path="echo -e ${PATH//:/\\n}"
 alias nowtime="date +'%T'"
 alias nowdate="date +'%d-%m-%Y'"
 alias np="nano -w PKGBUIILD"
-alias e="$EDITOR"	# defined in ~/.bashrc
-alias se="sudo $EDITOR"
+alias ed="$EDITOR"	# defined in ~/.bashrc
+alias sued="sudo $EDITOR"
 alias ka="kilall"
 alias kc="killall conky" # quickly kill conkies
 alias ps="ps auxf"
@@ -474,3 +474,5 @@ alias les='LESSOPEN="| src-hilite-lesspipe.sh %s" LESS=" -R " less -N'
 #	alias ls="ls -F --color=auto"
 #fi
 alias matrix="unimatrix -fa -lm -s 95"
+
+##EOF##

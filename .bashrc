@@ -171,4 +171,4 @@ selection="_default" #FOR TESTING PURPOSES ONLY! I use this to choose which vari
 # Enable thefuck
 #eval "$(thefuck --alias)"
 
-
+##EOF##
