@@ -53,6 +53,9 @@ let g:syntastic_check_on_wq = 0
 "Plugin 'tpope/vim-fugitive'
 
 Plugin 'itchyny/Lightline.vim'	" Lightline statusbar
+"Plugin 'tomasiser/vim-code-dark'    " VSCode Dark+ theme, clone
+Plugin 'sainnhe/sonokai'    " shonokai/maia colorscheme
+Plugin 'sheerun/vim-polyglot' " multi languages syntax
 "Plugin 'francoiscabrol/ranger.vim' "Ranger integration in vim and neovim 
 Plugin 'scrooloose/nerdtree' " nerdtree
 Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
@@ -61,12 +64,14 @@ Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
 "Plugin 'jreybert/vimagit'
 "Plugin 'severin-lemaignan/vim-minimap'
 Plugin 'ap/vim-css-color' " CSS color preview
+Plugin 'gko/vim-coloresque.git'
 "Plugin 'tpope/vim-surround' " Change surrounding marks
 "Plugin 'tpope/vim-repeat'
 "Plugin 'tpope/vim-commentary'
 "Plugin 'tpope/vim-unimpaired'
 "Plugin 'hsitz/VimOrganizer' " Org Mode in Vim!
 Plugin  'kovetskiy/sxhkd-vim' "sxhkd syntax and indentetion
+Plugin  'stephpy/vim-yaml'  "YAML syntax (alacritty config)
 "Plugin 'jremmen/vim-ripgrep' "fast grep
 "Plugin 'leafgarland/typescript-vim' " typescript file highlights
 "Plugin 'vim-utils/vim-man'
@@ -201,7 +206,7 @@ if !exists(":DiffOrig")
   command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
          \ | wincmd p | diffthis
 endif
-
+"au BufNewFile,BufRead *.yaml,*.yml so ~/.vim/yaml.vim
 
 set hidden  " hide when switching buffers, don't unload
 set nowrap    " word wrap
@@ -263,7 +268,7 @@ nnoremap <S-o> O<Esc>
 " Stasus bar / Poweline / LightLine
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:lightline = {
-	\ 'colorscheme' : 'seoul256',
+	\ 'colorscheme' : 'sonokai'
 	\}
 
 " Always show statusline
@@ -322,10 +327,18 @@ let g:minimap_highlight='Visual'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colors
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set t_ut=
+"let g:codedark_term256=1
 "let g:hybrid_use_Xresources = 1
 "colorscheme hybrid
-colo default " use the default colorscheme
-
+"colo default " use the default colorscheme
+"colorscheme codedark    " Dark+ VSCode theme
+set background=dark
+set termguicolors
+let g:sonokai_style = 'maia'
+let g:sonokai_enable_italic = 1
+let g:sonokai_disable_italic_comment = 1
+colorscheme sonokai
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mouse
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -391,8 +404,9 @@ set display=truncate
 
 " line term
 set colorcolumn=80
-highlight ColorColumn ctermbg=0 guibg=lightgrey
-
+"highlight ColorColumn guibg=grey
+"highlight Comment cterm=italic  " Use italic fonts for comments
+"hi Normal ctermbg=NONE
 " do not recognize octal numbers for C-A and C-X, most users find it confusing
 set nrformats-=octal
 
