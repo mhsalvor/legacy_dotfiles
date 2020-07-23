@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-#	   _ _                    
+#   	   _ _                    
 #         | (_)                      
 #     __ _| |_  __ _ ___ _ __ ___   
 #    / _` | | |/ _` / __| '__/ __|
@@ -32,7 +32,8 @@ alias su="/usr/bin/su"
 # If "lsd" is installed, use it instead of "ls"
 # define some standard options for "ls" otherwise.
 command -v lsd > /dev/null && alias ls="lsd" ||\
-      alias ls="ls -hNCF --color=auto --group-directories-first --time-style=+'%d.%m.%Y %H:%M'"
+      alias ls="ls -hNCF --color=auto --group-directories-first\
+            --time-style=+'%d.%m.%Y %H:%M'"
 
 alias sl="ls"		# avoid annoying typos
 alias ll="ls -l"
@@ -159,7 +160,7 @@ alias bc="bc -lq"	# a quick calculator
 alias sha1="openssl sha1"
 
 # pacman
-alias pacman="sudo pacman --color auto"
+alias pacman="pacman --color auto"
 alias pacsi="pacman -Si" # Displays information on a given sync database package
 alias pacss="pacman -Ss" # search in the sync database for name/description on regexp
 alias pacqi="pacman -Qi" # Displays information on installed packages
