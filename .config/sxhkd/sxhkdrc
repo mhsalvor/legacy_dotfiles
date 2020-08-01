@@ -1,0 +1,274 @@
+#             _     _       _
+#            | |   | |     | |
+#    _____  _| |__ | | ____| |_ __ ___
+#   / __\ \/ / '_ \| |/ / _` | '__/ __|
+#   \__ \>  <| | | |   < (_| | | | (__
+#   |___/_/\_\_| |_|_|\_\__,_|_|  \___|
+#
+#   ~/.config/.sxhkdrc - the Simple Hotkeys Daemon configuration file.
+#
+#   This files contains the configurations for sxkhd which manages keybindings
+#   for bspwm.
+#
+#   Written to work on *most* GNU/Linux Distributions.
+#   Things not working or WIP are commented. Usually.
+#   Stolen from many places over the years and tweaked to work for me.
+#   Fell free to use and modify all or some part of it, just remember:
+#   I am not responsable if this breacks your System or Machine!
+#
+##  by: Giuseppe (mhsalvor) Molinaro g.molinaro@linuxmail.org
+#
+
+#----/key legend/-----
+#XF86Launch6 = fn+space
+# mod1 = alt
+# mod2
+# mod3
+# mod4
+# mod5 = alt_gr
+
+#---- Bspwm - sxkhd - picom - bar ----
+
+#Cleanly quit,reload bpswm
+super + {_,shift +} Escape
+    bspc {wm -r,quit 1 && pkill lemonpanel && pkill lemonbar}
+
+# In case bspwmrc fails to execute/ you wish have plugged in a new monitor
+super + ctrl + Escape
+    bspwmrc
+
+# make sxhkd reload its configuration files
+super + alt + Escape
+    pkill -USR1 -x sxhkd
+
+# toggle compositing
+super + ctrl + c
+    {pkill picom , picom -b}
+
+#---- Window manipulation ----
+# Close,Kill window
+super + {_,shift} + q
+    bspc {node -c,node -k}
+
+# Float focused window in front of the others / put it back
+super + t
+	{bspc node -t floating && window-placer $(bspc query -T -d | grep -o '"state":"floating"' | wc -l),bspc node -t tiled}
+# Cycle tiling modes
+super + shift + t
+    bspc node -t {pseudo_tiled,tiled}
+# Force all windows of the desktop to tile
+super + ctrl + t
+    bspc tile
+# Force all windows of the desktop to float and arrange them
+super + ctrl + shift + t
+    bspc float
+
+# Toggle Fullscreen
+super + f
+    bspc node -t {fullscreen,tiled}
+
+# Toggle monocle mode
+super + shift + f
+    bspc deskto -l next
+
+# Try to keep size and position of the selected window
+super + p
+    bspc node -g private
+# Lock a window from closing
+super + shift + p
+    bspc node -g locked
+
+# Make a window sticky : it follows you an all desktops
+super + e
+    bspc node -g sticky
+
+# Map,unmap windows <!----USES external scripts and dmenu/rofi----!>
+super + period
+    whid dmenu
+super + minus
+    whid hide
+super + plus
+    whid last
+
+#---- Window moving and splitting ----
+
+# Autopresel (splits windows in its largest dimension) <!----USES external scripts and dmenu/rofi----!>
+super + ctrl + 0
+    auto-presel
+
+# Remove receptacles
+super + BackSpace
+    for i in $(bspc query -N -n .leaf.!window.local); do bspc node $i -k; done
+
+# Presel window for splitting in a given direction
+super + ctrl + {h,j,k,l}
+    bspc node -p \~{west,south,north,east}
+# Presel the desktop for splitting in a given direction
+super + shift + ctrl + {h,j,k,l}
+    bspc node @/ -p \~{west,south,north,east}
+
+# Set splitting ratio of windows
+super + ctrl + {1-9}
+    bspc node -o 0.{1-9}
+
+# Move current window to largest space or preselected area (if it exists)  <!----USES external scripts and dmenu/rofi----!>
+super + space
+    windowpromoter
+
+# crete a new "master area", splitting the whole desktop insteadd of a window
+super + alt + space
+    bspc node -n @/
+
+# go (shift=move) to deskto X (and focus the monitor that the desktop is located on)
+super + {_,shift +}{1-9,0}
+    bspc {desktop -f, node -d} ^{1-9,10}
+
+# select previous/next desktop
+super + {m,n}
+    bspc desktop -f {prev.occupied,next.occupied}
+
+# go to specific window <!----USES external scripts and dmenu/rofi----!>
+super + tab
+    WindowSelector
+
+# cycle windows
+alt + {_,shift +} tab
+    bspc node -f {next,prev}
+
+# Focus by direction, works with multihead <!----USES external scripts and dmenu/rofi----!>
+super + {h,j,k,l}
+    focusmover {west,south,north,east}
+
+# Move tiled windows. <!----USES external scripts and dmenu/rofi----!>
+# Moving a riled window to a preselected one moves into preselection instead.
+# Moving out of the screen should move the window to the next monitor if possible.
+super + shift + {h,j,k,l}
+    windowgrabber {west,south,north,east}
+# Different style of movement: transplant into window in chosen direction
+super + ctrl {h,j,k,l}
+    euclid_mover {west,south,north,east}
+
+# resize windows <!----USES external scripts and dmenu/rofi----!>
+super + alt + {h,j,k,l}
+    bspwm_resize.sh {west,south,north,east}
+
+# Balance tree
+super + b
+    bspc node @/ -B
+# Balance brother mode.
+# If you do this on the biggest window on the desktop i usually means balancing
+# all windows but the biggest
+super + shift +b
+    bspc node @ brother -B
+# Undo balancind (equalize windows)
+super + alt + b
+    bspc node @/ -E
+# Tobble automatic balancing of windows <!----USES external scripts and dmenu/rofi----!>
+super + ctrl + b
+    euclid_balancer
+
+# Mirror and flip leaves of tree
+super + {_,shift +} comma
+    bspc node @/ -R {90,270}
+
+# Change windows gap
+#super + g
+#	bspc config -d focused window_gap {$gap,$(($gap+$gap)),$(($gap+$gap+$gap))}
+super + button{4,5}
+    bspc config -d focused window_gap $((`bspc config -d focused window_gap` {+,-} 2 ))
+
+#---- Mouse bindings ---- <!----USES external scripts and dmenu/rofi----!>
+~button1
+    DidIClickDesktop.sh && gapgrab
+~button2
+    DidIClickDesktop.sh && mygtkmenui -- .config/GTKmenu/BspwmDesktopMenui
+~button3
+    DidIClickDesktop.sh && mygtkmenui -- .config/GTKmenu/LaunchMenu
+
+# Add or remove desktops by strolling
+super + ctrl + button5
+    bspcp dsktp rm
+super + ctrl + button4
+    bspcp dsktp add
+
+# Spawn applications popup menu and manually tile selected app where your mouse
+# was when you opened the menu.
+# Smartsplit only chooses biggest dimension of the window,
+# MouseLaunch only cares wich edge is closer.
+mod5 + @button1
+    MouseLaunch ; mygtkmenui -- .config/GTKmenu/LaunchMenu
+#   smartsplit ; dboxmenu
+
+# Spawn window manipulation menu
+mod1 + @button1
+    mygtkmenui -- .config/GTKmenu/BspwmDesktopMenui
+
+#---- Media keys ----
+
+XF86AudioRaiseVolume
+	volume up
+
+XF86AudioLowerVolume
+	volume down
+
+XF86AudioMute
+	volume mute
+
+XF86MonBrightnessDown
+ light -U 5
+
+XF86MonBrightnessUp
+ light -A 5
+
+
+XF86Sleep
+	systemctl suspend
+
+#---- Applications launchers ----
+# hide panel
+super + shift + space + z
+    hidePanel
+
+super + Return
+    default-terminal
+#    $TERMINAL
+super + shift + Return
+    open-terminal-here
+
+# run applications
+#super + shift + Return
+super + d
+    dmenu_recent -fn 'xos4 JetBrains Mono:size=9' -i -l 10 -w 600 -y $PANEL_HEIGHT
+# rofi menu (triggered on LEFT super key)
+super + shift + space
+    rofi -show
+
+super + r
+    rofi-finder.sh
+
+Print
+    scrot
+
+super + F1
+    $TERMINAL -e $CALENDAR
+
+super + {_,shift +} F2
+    {$BROWSER,$PBROWSER}
+
+super + {_,shift +} F3
+    {$FILEMGR,default-terminal ranger}
+
+super + F4
+    $TERMINAL -e $MAIL
+
+super + F5
+    $TERMINAL -e pacfzf
+super + F6
+    $TERMINAL -e yayfzf
+
+#super + F7
+#super + F8
+#super + F9
+#super + F10
+#super + F11
+#super + F12
