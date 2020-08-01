@@ -117,28 +117,13 @@ xhost +local:root > /dev/null 2>&1
 # make less more friendly for non-text input files. Lists files inside archives etc...
 [[ -x /usr/bin/lesspipe.sh ]] && eval "$(SHELL=/bin/sh lesspipe.sh)"
 
-
-#Stay home, stay safe
-#curl https://corona-stats.online/Italy
-
 # startup programs
 
-#if [ "$USE_SCREEN" = "Y" ]; then
-#    if [ "$UID" -ne 0 ]; then
-#        if [ "$SHLVL" -eq 1 ]; then
-#            /usr/bin/screen -d -RR
-#        fi
-#    fi
-#fi
-#
-#if [ -e "/usr/games/fortune" ]; then
-#    echo "Fortune: "
-#    /usr/games/fortune
-#    echo
-#fi
-#if [ -e "/usr/bin/uptime" ]; then
-#    echo "Uptime: ` /usr/bin/uptime`"
-#fi
+if [ -e "/usr/games/fortune" ]; then
+    echo "Fortune: "
+    /usr/games/fortune
+    echo
+fi
 # Fortune and some cosmetic gimmiks, ignore this unless you really want it.
 # If you are wondering, try and look from where my username cames from...
 #if [ "`id -u`" = "0" ]; then
@@ -166,9 +151,5 @@ selection="_default" #FOR TESTING PURPOSES ONLY! I use this to choose which vari
 
 # Read ~/.aliasrc for aliases
 [[ -f $HOME/.aliasrc ]] && source $HOME/.aliasrc
-
-
-# Enable thefuck
-#eval "$(thefuck --alias)"
 
 ##EOF##
