@@ -1,0 +1,13 @@
+{
+    "cSpellExt.enableDictionaries" : ["italian"],
+    "cSpell.language": "en-US,en-GB,it",
+    "cSpell.maxNumberOfProblems": 100,
+    "cSpell.numSuggestion": 8,
+
+    "cSpell.userWords": [
+      "Molinaro",
+      "Smithxyz",
+      "mhsalvor"
+    ]
+
+}
