@@ -64,12 +64,12 @@ super + ctrl + shift + t
     bspc float
 
 # Toggle Fullscreen
-super + f
+super + shift + f
     bspc node -t {fullscreen,tiled}
 
 # Toggle monocle mode
-super + shift + f
-    bspc deskto -l next
+super + f
+    bspc desktop -l next
 
 # Try to keep size and position of the selected window
 super + p
@@ -112,7 +112,7 @@ super + ctrl + {1-9}
     bspc node -o 0.{1-9}
 
 # Move current window to largest space or preselected area (if it exists)  <!----USES external scripts and dmenu/rofi----!>
-super + space
+super + w
     windowpromoter
 
 # crete a new "master area", splitting the whole desktop insteadd of a window
@@ -128,7 +128,7 @@ super + {m,n}
     bspc desktop -f {prev.occupied,next.occupied}
 
 # go to specific window <!----USES external scripts and dmenu/rofi----!>
-super + tab
+super + space
     WindowSelector
 
 # cycle windows
@@ -230,8 +230,8 @@ super + shift + space + z
     hidePanel
 
 super + Return
-    default-terminal
-#    $TERMINAL
+#    default-terminal
+    $TERMINAL
 super + shift + Return
     open-terminal-here
 
@@ -256,7 +256,7 @@ super + {_,shift +} F2
     {$BROWSER,$PBROWSER}
 
 super + {_,shift +} F3
-    {$FILEMGR,default-terminal ranger}
+    {$FILEMGR,$TERMINAL -e ranger}
 
 super + F4
     $TERMINAL -e $MAIL

@@ -34,7 +34,7 @@ Xft.lcdfilter:  lcddefault
 ! Cyan
 *.color6:   #1abb9b
 ! White
-*.color7:   #d8d8d8    
+*.color7:   #d8d8d8
 !*.color7:   #d3d0c8
 
 !!  Light Colors:
@@ -61,9 +61,9 @@ Xft.lcdfilter:  lcddefault
 Xterm*background:           #222d31
 Xterm*foreground:           #d8d8d8
 Xterm*pointerColor:         #1abb9b
-Xterm*faceName:             Terminus 
+Xterm*faceName:             JetBrains
 Xterm*renderFont:           true
-Xterm*faceSize:             10
+Xterm*faceSize:             9
 Xterm*reverseVideo:         on
 Xterm*SelectToClipboard:    true
 

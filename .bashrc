@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
-#     _               _              
-#    | |             | |             
-#    | |__   __ _ ___| |__  _ __ ___ 
+#     _               _
+#    | |             | |
+#    | |__   __ _ ___| |__  _ __ ___
 #    | '_ \ / _` / __| '_ \| '__/ __|
-#   _| |_) | (_| \__ \ | | | | | (__ 
+#   _| |_) | (_| \__ \ | | | | | (__
 #  (_)_.__/ \__,_|___/_| |_|_|  \___|
 #
 # ~/.bashrc - executed by bash(1) for non login interactive shells
 #
 # This file is sourced by all *interactive* bsah shells on startup,
 # including some apparently interactive shells such as scp and rcp
-# that can't tolerate any output. 
+# that can't tolerate any output.
 #
 # Wrtitten to work on *most* GNU/Linux distributions.
 # Things not working or WIP are commented. Usually.
@@ -26,7 +26,7 @@
 [[ $- != *i* ]] && return
 
 # Set a font for tty
-[[ $TERM = "linux" ]] && setfont ter-116n
+#[[ $TERM = "linux" ]] && setfont ter-116n
 
 #=====|  Shell options
 
@@ -50,7 +50,7 @@ shopt -s cmdhist # save multi-line commands in history as a single line
 shopt -s complete_fullquote # bash quotes ALL metaharacters in filenames and dir names
 shopt -s dotglob # include .files in the expasion of *
 shopt -s expand_aliases # exspand aliases in non iteractive (i.e. scripts) shells
-shopt -s extglob # Turn on the extended pattern matching features 
+shopt -s extglob # Turn on the extended pattern matching features
 shopt -s extquote # $'string' / $"string" quoting within ${parameter} expansions in ""
 shopt -s force_fignore # respect the FIGNORE shell variable during completion
 shopt -s globasciiranges # ignore current locale collating sequence in range exp
