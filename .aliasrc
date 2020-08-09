@@ -17,14 +17,11 @@
 #
 #
 
-# Stay home, stay safe.
-alias icorona="curl https://corona-stats.online/Italy?source=2"
-
 # Custom git command to archive my config files
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 # Use neovim for vim if present
-#command -v nvim >/dev/null && alias vim="nvim" vimdiff="nvim -d"
+command -v nvim >/dev/null && alias vim="nvim" vimdiff="nvim -d"
 
 # let's make sure we are using a sage version of 'su'
 alias su="/usr/bin/su"
@@ -71,6 +68,7 @@ alias j="jobs -l"
 alias path="echo -e ${PATH//:/\\n}"
 alias nowtime="date +'%T'"
 alias nowdate="date +'%d-%m-%Y'"
+alias r="ranger"
 alias np="nano -w PKGBUIILD"
 alias v="$EDITOR"	# defined in ~/.bashrc
 alias sv="sudo $EDITOR"
@@ -475,5 +473,39 @@ alias les='LESSOPEN="| src-hilite-lesspipe.sh %s" LESS=" -R " less -N'
 #	alias ls="ls -F --color=auto"
 #fi
 alias matrix="unimatrix -fa -lm -s 95"
+alias c='"$(history | tail -2 | sed "s/  [0-9]*  //;2d")" > /tmp/cmdoutput && cat /tmp/cmdoutput | xsel -b && notify-send "Terminal" "Ouput Copied"'
+# cd when exiting lf
+# lc () {
+#     tmp="$(mktemp)"
+#     lf -last-dir-path="$tmp" "$@"
+#     if [ -f "$tmp" ]; then
+#         dir="$(cat "$tmp")"
+#         rm -f "$tmp"
+#         [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
+#     fi
+# }
+
+# dc () {
+#     dfm
+#     dir="$(cat ~/.config/dmenufm/dmenufm_lastpath)"
+#     [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
+# }
+
+# # Colourized less output
+# cless() {
+#   case "$1" in
+#       *.md) glow -s dark "$1" | less -r;;
+#       *) highlight -O ansi "$1" --force | less -r;;
+#   esac
+# }
+
+# # Colourized cat output
+# ccat() {
+#   case "$1" in
+#       *.md) glow -s dark "$1";;
+#       *) highlight -O ansi "$1" --force;;
+#   esac
+# }
+
 
 ##EOF##

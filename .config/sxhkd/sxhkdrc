@@ -20,18 +20,26 @@
 #
 
 #----/key legend/-----
+#
+#-X Modifiers bit
+# shift = shift (L,R)
+# lock  = Caps Lock
+# ctrl  = ctrl (L,R)
+# mod1 = alt (alt_L)
+# mod2 = numlock
+# mod3 =
+# mod4 = super (winkey)
+# mod5 = alt_gr (iso_lvl3_shift)
+#
+#-X multimedia Keys
 #XF86Launch6 = fn+space
-# mod1 = alt
-# mod2
-# mod3
-# mod4
-# mod5 = alt_gr
 
 #---- Bspwm - sxkhd - picom - bar ----
 
 #Cleanly quit,reload bpswm
 super + {_,shift +} Escape
-    bspc {wm -r,quit 1 && pkill lemonpanel && pkill lemonbar}
+    bspc {wm -r,quit 1 && pkill polybar}
+# prompt " Are you sure you would like to quit this Xsessio?" "bspc quit"
 
 # In case bspwmrc fails to execute/ you wish have plugged in a new monitor
 super + ctrl + Escape
@@ -132,7 +140,7 @@ super + space
     WindowSelector
 
 # cycle windows
-alt + {_,shift +} tab
+alt + {_,shift +} Tab
     bspc node -f {next,prev}
 
 # Focus by direction, works with multihead <!----USES external scripts and dmenu/rofi----!>
@@ -158,7 +166,7 @@ super + b
 # Balance brother mode.
 # If you do this on the biggest window on the desktop i usually means balancing
 # all windows but the biggest
-super + shift +b
+super + shift + b
     bspc node @ brother -B
 # Undo balancind (equalize windows)
 super + alt + b
@@ -238,7 +246,8 @@ super + shift + Return
 # run applications
 #super + shift + Return
 super + d
-    dmenu_recent -fn 'xos4 JetBrains Mono:size=9' -i -l 10 -w 600 -y $PANEL_HEIGHT
+    dmenu_recent -fn 'xos4 JetBrains Mono:size=9' -i -l 10 -w 600 -y 16
+
 # rofi menu (triggered on LEFT super key)
 super + shift + space
     rofi -show

@@ -65,6 +65,8 @@ Plugin 'sainnhe/sonokai'	" sonokai/maia theme
 "" Quality of life
 Plugin 'terryma/vim-multiple-cursors'   " Multi-cursor
 Plugin 'RRethy/vim-hexokinase', {'do': 'make hexokinase'} " Async color preview
+Plugin 'tpope/vim-surround'     " Change surrounding symbols
+Plugin 'vimwiki/vimwiki'
 
 "" Code completion
 Plugin 'neoclide/coc.nvim', {'branch': 'release'}  " coc-vim
@@ -80,9 +82,11 @@ Plugin 'preservim/nerdtree'  " NERDTree - a tree explorer plugin for vim
 Plugin 'Xuyuanp/nerdtree-git-plugin' " git support for NERDTree
 Plugin 'ryanoasis/vim-devicons'     " enables devicons - needs to be After NERDTree-git
 Plugin 'tiagofumo/vim-nerdtree-syntax-highlight' " syntax highlight for NERDTree
+"Plugin 'francoiscabrol/ranger.vim'     " Ranger integration
 
 "" Git
 Plugin 'airblade/vim-gitgutter'
+Plugin 'tpope/vim-fugitive'
 
 "" Initialize Vundle
 if iCanHazVundle == 0
@@ -140,11 +144,34 @@ nnoremap <leader>s :w<CR>
 " Save file as sudo when no sudo permissions
 cmap w!! w !sudo tess > /dev/null %
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" General Appearances and Quality of Life
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"" AirLine Statusbar
+" Copy and paste
+vnoremap <C-c> "*y : let @+=@*<CR>  " copy to both the clipboard and primary selection
+map <C-p> "+P   " paste where the cursor is
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" General Appearances and Quality of Life
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" AirLine Statusbar
 let g:airline_powerline_fonts = 1 " enable powerline symbols
+"" powerline symbols
+"let g:airline_left_sep = ''
+"let g:airline_left_alt_sep = ''
+"let g:airline_right_sep = ''
+"let g:airline_right_alt_sep = ''
+"let g:airline_symbols.crypt = ''
+"let g:airline_symbols.linenr = '☰'
+"let g:airline_symbols.maxlinenr = ''
+"let g:airline_symbols.branch = ''
+"let g:airline_symbols.paste = 'ρ'
+"let g:airline_symbols.spell = 'Ꞩ'
+"let g:airline_symbols.notexists = 'Ɇ'
+"let g:airline_symbols.whitespace = 'Ξ'
+"let g:airline_symbols.readonly = ''
+"let g:airline_symbols.dirty='⚡'
+
+let g:airline#extensions#wordcounts#enabled = 1 " GitGutter integration
+let g:airline#extensions#hunks#non_zero_only =1
 let g:airline_theme = 'sonokai'    " use sonokai theme
 
 "" Theme - Sonokai Maia
@@ -154,7 +181,6 @@ let g:sonokai_disable_italic_comment = 0    " toggle italic for comments
 let g:sonokai_transparent_background = 0    " toggle transparent background
 let g:sonokai_sign_column_background = 'none' " set the background for signcolumn
 let g:sonokai_better_performance = 1    " reduce loading times
-
 colorscheme sonokai
 
 "" Interface tweaking
@@ -201,12 +227,6 @@ autocmd BufWritePre * %s/\s\+$//e
 " ------------ CoC -----------------------------------------------------------
 "  prettier command for coc
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
-"let g:gog_global_extension = [
-"    \ 'coc-snippets',
-"    \ 'coc-pairs',
-"    \ 'coc-prettier',
-"    \ 'coc-vimtex'
-"    \]
 
 " Some servers have issues with backup files, see #649.
 set nobackup
@@ -376,24 +396,24 @@ let g:NERDTreeGitStatusUseNerdFonts = 1 " you should install nerdfonts!
 let NERDTreeMinimalUI = 0 " use a minimalist UI if 1, hides ? help
 "----end NERDTree
 
-"-------------------vim-hexokinase--------------------------------------------
-" Update when leaving Insert Mode
-let g:Hexokinase_refreshEvents = ['InsertLeave']
-" What formats to higlight
-let g:Hexokinase_optInPatterns = [
-            \ 'full_hex',
-            \ 'triple_hex',
-            \ 'rgb',
-            \ 'rgba',
-            \ 'hsl',
-            \ 'hsla',
-            \ 'colour_names'
-            \]
-" Use the full background theme
+""-------------------vim-hexokinase--------------------------------------------
+"" Update when leaving Insert Mode
+let g:Hexokinase_refreshEvents = ['TextChangedI', 'TextChanged', 'InsertLeave']
+"" What formats to highlight
+" let g:Hexokinase_optInPatterns = [
+            " \ 'full_hex',
+            " \ 'triple_hex',
+            " \ 'rgb',
+            " \ 'rgba',
+            " \ 'hsl',
+            " \ 'hsla',
+            " \ 'colour_names'
+            " \]
+"" Use the full background theme
 let g:Hexokinase_highlighters = ['backgroundfull']
-" Enable hexokinase on enter
+"" Enable hexokinase on enter
 autocmd VimEnter * HexokinaseTurnOn
-"-----end Hexokinase
+""-----end Hexokinase
 
 "------- GitGutter --------------------------
 " some colors
@@ -413,7 +433,7 @@ let g:gitgutter_highlight_linenrs = 1
 
 "" Fix some filetype detections
 autocmd BufRead,BufNewFile *.tex set filetype=tex  " TeX
-autocmd BufRead,BufNewFile /tmp/calcurse*,~/.calsurse/notes/* set filetype=markdown
+autocmd BufRead,BufNewFile /tmp/calcurse*,~/.calcurse/notes/* set filetype=markdown
 
 "" Enable spellcheking when needed
 autocmd FileType tex,latex,markdown setlocal spell spelllang=it,en_us,en_gb

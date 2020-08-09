@@ -9,60 +9,100 @@
 #            |_|
 #
 #   ~/.config/bspwm - Bspwm Configuration file
+#
 
-# Gap between windows
-export gap=4
-# Panel height
-export PANEL_HEIGT=20
+# sanitize the enviroment
+bspc rule -r "*"
 
-# This creates negative padding equal to window gap so that
-# gaps are shown only between windows and not on desktop edges.
-bspc config window_gap      $gap;
-bspc config top_padding     $((PANEL_HEIGT-$gap))
-bspc config left_padding    -$gap
-bspc config right_padding   -$gap
-bspc config bottom_padding  -$gap
+###---- Autostart ----###
+nm-applet &
+#xrdb ~/.Xresources &
+#picom -b &
+# limepanel &
+pa-applet &
+start-pulseaudio-x11 &:
+variety &
+xfce4-power-manager &
+pamac-tray &
+clipit &
+redshift-gtk &
+unclutter &
+polybar-launcher.sh
+#killall bspwallow
+#pidof bspwallow || bspwallow &
 
-# Various settings
+###---- Monitors ----###
+#bspc monitor -d          
+#bspc monitor LVDS1           
+#bspc monitor m0=$(xrandr --listactivemonitors|grep 0:|awk '{print $4}')
 
-# Defailt setup uses negative pagging. Gapless monovle looks really weird like that
+# This creates and names desktops for multiple monitors.
+workspaces_multimonitor &
+
+bspc config remove_disabled_monitors true
+bspc config remove_unplugged_monitors true
+bspc merge_overlapping_ monitors true
+
+# this should smooth mouse polling and windows movements
+# value is 1000/refresh_rate; 1000/60=16.6666666... => 16
+bspc config pointer_motion_interval 16
+
+###---- Global Settings ----###
+# default positioning scheme - second_child,spiral,alternate
+bspc config automatic_scheme second_child
+# on wich child should a new window be attached - {first,second}_child
+bspc config initial_polarity second_child
+# Defailt setup uses negative gaps. Gapless monovle looks really weird like that
 bspc config gapless_monocle     false
 bspc config borderless_monocle  true
 bspc config single_monocle      false
 #bspc config ignore_ewh_focus   false
-#bspc config initial_polarity   second_child
-bspc config remove_disabled_monitors    true
-bspc config remove_unplugged_monitors   true
-
 ## Honr size hints: do not make windows smaller than they wish to be
 #bspc config honor_size_hints   true
+# Settings for manual splittinU
+bspc config split_ratio 0.52
 
-## Color Settings
-bspc config focused_border_color    "#585858"
-bspc config normal_border_color     "#222D31"
-bsps config presel_feedback_color   "#8d8f8d"
-bspc config border_width 1
+# Action on windows using the mouse:
+bspc config pointer_modifier mod4           # use super as a modifier
+bspc config pointer_action1 move            # button1 (L click) moves a window
+bspc config pointer_action2 resize_side     # button2 () resize from a side
+bspc config pointer_action3 resize_corner   # button3 () resize from a corner
+bspc config click_to_focus none             # disable click to focus.
 
 bspc config focus_follows_pointer true
 # Some keybindings automatically enable and disavle this settings
 #bspc config pointer_follow_focus true
 
-# Settings for manual splitting
-bspc config split_ratio 0.52
 
-#bspc monitor -d          
+###---- Color Settings ----###
+bspc config normal_border_color     "#222D31"   # border of unfocused windows
+bspc config active_border_color     "#d8d8d8"   # border of fucused window on unfocused monitor
+bspc config focused_border_color    "#585858"   # border of fucused window on focused monitor
+bsps config presel_feedback_color   "#66cccc"   # "node --presel --{dir,ratio}" feedback area color
+bspc config urgent_border_color     "#ab4642"   # border of urgent windows
 
-# This creates and names desktops for multiple monitors.
-workspaces_multimonitor &
+###---- Desktop area and general windows settings ----###
+export gap=2            # gap between windows
+export PANEL_HEIGT=16   # reserved space for the panel
 
-# Windows and Application Rules
+# This creates negative padding equal to window gap so that
+# gaps are shown only between windows and not on desktop edges.
+bspc config top_padding     $((PANEL_HEIGT-$gap))
+bspc config bottom_padding  -$gap
+bspc config left_padding    -$gap
+bspc config right_padding   -$gap
+bspc config window_gap      $gap;
+bspc config border_width 1          # dimension of window borders
+
+###---- Windows and Application Rules ----###
 bspc rule -a gcolor3 state=floating center=true
-bspc rule -a lxappearance state=floating center=true
-bspc rule -a file-file-roller state= floating center=true
+bspc rule -a Lxappearance state=floating center=true
+bspc rule -a file-file-roller state=floating center=true
 bspc rule -a spotify state=pseudo_tiled
 bspc rule -a conky sticky=on manage=off lower=on
-bspc rule -a firefox private=on
 bspc rule -a libreoffice state=tiled
-
-## Autostart apps
-limepanel &
+bspc rure -a Galculator state=floating center=true
+bspc rule -a File Transfer* state=floating
+bspc rule -a Pamac-manager state=floating
+bspc rule -a virtualbox state=floating
+bspc rule -a Variety state=floating manage=on layer=above private=on follow=off
