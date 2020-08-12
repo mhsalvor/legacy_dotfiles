@@ -76,8 +76,7 @@ alias ka="kilall"
 alias kc="killall conky" # quickly kill conkies
 alias ps="ps auxf"
 alias hw="hwinfo --short"
-alias edit="nano -AWcimw" # smart home key, punctuation is part of the word,
-			  # show cursor position, mouse support, no hard wrap
+alias edit="nano"
 
 alias mkdir="mkdir -pv" # creates parent directories if not present. Verbose
 alias mv="mv -vi"

@@ -35,6 +35,7 @@ export MAIL=/usr/bin/neomutt
 export NPM_CONFIG_PREFIX=~/.local
 export WM="bspwm"
 export COLORTERM="truecolor"
+export MYVIMRC=~/.config/nvim/init.vim
 # Disable .NET telemetry (should not be necessary with Codium, but...)
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 

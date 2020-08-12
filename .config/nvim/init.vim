@@ -23,93 +23,57 @@
 "
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Vundle - Plugin Manager
+" vim-plug - Plugin Manager
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" The following code will check for Vundle. If it's not present in your system
+" The following code will check for vim-plug. If it's not present in your system
 " it will set it up and all of your plugins with it.
 " Useful on new installation when all you need to restore your settings is
 " this one file.
-" Credits: Erik Zaadi - https://erikzaadi.com
-let iCanHazVundle=1
-let vundle_readme=expand('~/.local/share/nvim/bundle/vundle/README.md')
-if !filereadable(vundle_readme)
-	echo "Installing Vundle..."
-	echo ""
+" Credits: https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
+if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
 	silent !mkdir -p ~/.local/share/nvim/bundle
 	silent !mkdir -p ~/.local/share/nvim/undo
-	silent !git clone https://github.com/VundleVim/Vundle.Vim ~/.local/share/nvim/bundle/vundle
-	let iCanHazVundle=0
+    silent !sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
-
-" nvim is allways nocompatible.
-" The folowing is needed for package installation
-filetype off
-
-" set the runtime path to include Vundle and Initialize
-set rtp+=~/.local/share/nvim/bundle/vundle/
-" set a sane installation dir for the plugins,
-" the default points to ~/.vim - lets keep ~ clean.
-call vundle#rc("~/.local/share/nvim/bundle")
-
 " Plugin list and Installation.
-" All Plugins must appear between vundle#begin() and vundle#end()
-call vundle#begin()
-"" Let Vundle manage itself, required.
-Plugin	'VundleVim/Vundle.vim'
+" All Plugins must appear between plug#begin() and plug#end()
+call plug#begin('~/.local/share/nvim/bundle')
+"" Required for :help vim-plug
+Plug 'junegunn/vim-plug'
 
 "" Themes
-Plugin 'vim-airline/vim-airline' " AirLine status bar
-Plugin 'vim-airline/vim-airline-themes' " AirLine themes
-Plugin 'sainnhe/sonokai'	" sonokai/maia theme
+Plug 'vim-airline/vim-airline' " AirLine status bar
+Plug 'vim-airline/vim-airline-themes' " AirLine themes
+Plug 'sainnhe/sonokai'	" sonokai/maia theme
 
 "" Quality of life
-Plugin 'terryma/vim-multiple-cursors'   " Multi-cursor
-Plugin 'RRethy/vim-hexokinase', {'do': 'make hexokinase'} " Async color preview
-Plugin 'tpope/vim-surround'     " Change surrounding symbols
-Plugin 'vimwiki/vimwiki'
+Plug 'terryma/vim-multiple-cursors'   " Multi-cursor
+Plug 'RRethy/vim-hexokinase', {'do': 'make hexokinase'} " Async color preview
+Plug 'tpope/vim-surround'     " Change surrounding symbols
+Plug 'vimwiki/vimwiki'
 
 "" Code completion
-Plugin 'neoclide/coc.nvim', {'branch': 'release'}  " coc-vim
-Plugin 'tpope/vim-commentary'   " commenting
+Plug 'neoclide/coc.nvim', {'branch': 'release'}  " coc-vim
+Plug 'tpope/vim-commentary'   " commenting
 
 "" Syntax hightliting
-Plugin 'sheerun/vim-polyglot'       " A collection of language packs.
-Plugin 'baskerville/vim-sxhkdrc'    " Simple X Hotkey Daemon config file
+Plug 'sheerun/vim-polyglot'       " A collection of language packs.
+Plug 'baskerville/vim-sxhkdrc'    " Simple X Hotkey Daemon config file
 
 "" Files search, navigation and manipulation
-Plugin 'junegunn/fzf.vim'    " fuzzy file finder
-Plugin 'preservim/nerdtree'  " NERDTree - a tree explorer plugin for vim
-Plugin 'Xuyuanp/nerdtree-git-plugin' " git support for NERDTree
-Plugin 'ryanoasis/vim-devicons'     " enables devicons - needs to be After NERDTree-git
-Plugin 'tiagofumo/vim-nerdtree-syntax-highlight' " syntax highlight for NERDTree
-"Plugin 'francoiscabrol/ranger.vim'     " Ranger integration
+Plug 'junegunn/fzf.vim'    " fuzzy file finder
+Plug 'preservim/nerdtree'  " NERDTree - a tree explorer plugin for vim
+Plug 'Xuyuanp/nerdtree-git-plugin' " git support for NERDTree
+Plug 'ryanoasis/vim-devicons'     " enables devicons - needs to be After NERDTree-git
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight' " syntax highlight for NERDTree
+"Plug 'francoiscabrol/ranger.vim'     " Ranger integration
 
 "" Git
-Plugin 'airblade/vim-gitgutter'
-Plugin 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
 
-"" Initialize Vundle
-if iCanHazVundle == 0
-	echo "Installing Vundle, please ignore keymap error messages."
-	echo ""
-	:PluginInstall
-endif
-call vundle#end()
-filetype plugin indent on	" required
-" To ignore plugin indent changes, instead, use:
-" filetype plugin on
-"
-" Vundle commands - brief help
-" :PluginList		-	lists configured plugins;
-" :PluginInstall	-	install plugins, append '!' to update;
-" :PluginUpdate		-	update plugins;
-" :PluginSearch foo	-	searches plugins for 'foo', append '!' to
-" 				refresh local chache;
-" :PluginClean		-	confirms removal of unused (commented)
-" 				plugins, append '!' to auto-approve removal.
-"
-" See :h vundle for more details.
-" Put your non-plugin stuff after this line.
+call plug#end()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Basic configuration and Defaults
@@ -125,8 +89,8 @@ set termguicolors " make nvim use truecolors
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Key mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let mapleader="è"         " map <leader>
-let maplocalleader="ò"    " map <localLeader>
+let mapleader="ò"         " map <leader>
+let maplocalleader="à"    " map <localLeader>
 
 " Create multiple newlines in normal mode
 nnoremap <S-o> O<Esc>

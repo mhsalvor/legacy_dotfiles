@@ -106,3 +106,4 @@ bspc rule -a File Transfer* state=floating
 bspc rule -a Pamac-manager state=floating
 bspc rule -a virtualbox state=floating
 bspc rule -a Variety state=floating manage=on layer=above private=on follow=off
+bspc rule -a Galculator state=floating manage=on layer=above sticky=on follow=off
