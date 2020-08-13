@@ -200,9 +200,9 @@ set wordchars "<_>."
 set titlecolor black,white
 set statuscolor black,white
 set errorcolor white,red
-set numbercolor white
-set keycolor white
-set functioncolor white
+set numbercolor green
+set keycolor green
+set functioncolor green
 
 ## Setup of syntax coloring.
 ##

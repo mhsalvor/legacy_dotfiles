@@ -506,5 +506,5 @@ alias c='"$(history | tail -2 | sed "s/  [0-9]*  //;2d")" > /tmp/cmdoutput && ca
 #   esac
 # }
 
-
+alias amule='amule --config-dir=$HOME/.config/aMule/amule.conf'
 ##EOF##
