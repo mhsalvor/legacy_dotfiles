@@ -1,52 +1,19 @@
-# $HOME/.profile
-[[ -f ~/.bashrc ]] && . ~/.bashrc
-#Set our umask
-umask 022
+#! /usr/bin/env bash
+#                      __ _ _
+#                     / _(_) |
+#     _ __  _ __ ___ | |_ _| | ___
+#    | '_ \| '__/ _ \|  _| | |/ _ \
+#   _| |_) | | | (_) | | | | |  __/
+#  (_) .__/|_|  \___/|_| |_|_|\___|
+#    | |
+#    |_|
+#
+#       $HOME/.profile - Bash enviroment configuration file
+#
+# By: Giuseppe (mhsalvor) Molinaro - g.molinaro@linuxmail.org
+#
 
-###---- Locales ----###
-export LANG=it_IT.UTF-8
-export LANGUAGE=it_IT.UTF-8:en_US-UTF-8
-export LINGUAS=it_IT.UTF-8
-export LC_ALL=it_IT.UTF-8
-
-# Set our default path
-export PANEL_FIFO="/tmp/panel-fifo"
-export PATH="$PATH:/usr/bin/core_perl:$HOME/.config/bspwm:$HOME/.bin:$HOME/.scripts/:$HOME/.local/bin"
-export XDG_CONFIG_HOME="$HOME/.config"
-export BSPWM_SOCKET="/tmp/bspwm-socket"
-export PANEL_HEIGHT=16
-export XDG_CONFIG_DIRS=/usr/etc/xdg:/etc/xdg
-export GUI_EDITOR=/usr/bin/code
-export BROWSER=/usr/bin/firefox
-export PBROWSER="/usr/bin/firefox --private-window"
-export TERMINAL=/usr/bin/alacritty
-export TERM=xterm-256color
-export QT_QPA_PLATFORMTHEME="qt5ct"
-export EDITOR=/usr/bin/nvim
-export VISUAL=/usr/bin/nvim
-export CODEEDITOR="/usr/bin/code"
-export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
-export PAGER=/usr/bin/less  # I may switch to most
-export GROFF_ENCODING=utf8
-export CALENDAR=/usr/bin/calcurse
-export FILEMGR=/usr/bin/pcmanfm
-export TUIFMNGR=/usr/bin/ranger:
-export MAIL=/usr/bin/neomutt
-export NPM_CONFIG_PREFIX=~/.local
-export WM="bspwm"
-export COLORTERM="truecolor"
-export MYVIMRC=~/.config/nvim/init.vim
-# Disable .NET telemetry (should not be necessary with Codium, but...)
-export DOTNET_CLI_TELEMETRY_OPTOUT=1
-
-# Improve the awful Java Gui
-export JAVA_FONTS=/usr/share/fonts/TTF
-export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=lcd_hrgb"
-
-# Compile using as many parallel jobs as possible
-export njobs=`getconf _NPROCESSORS_ONLN`
-export NUMJOBS="-j$njobs"
-export MAKEFLAG="$NUMJOBS"
+###---= Inizialiaze =---###
 # Load profiles from /etc/profile.d
 if test -d /etc/profile.d/; then
 	for profile in /etc/profile.d/*.sh; do
@@ -60,11 +27,72 @@ if test "$PS1" && test "$BASH" && test -r /etc/bash.bashrc; then
 	. /etc/bash.bashrc
 fi
 
-# Termcap is outdated, old, and crusty, kill it.
-unset TERMCAP
+# Source user bash config
+[[ -f ~/.bashrc ]] && . ~/.bashrc
 
-# Man is much better than us at figuring this out
-unset MANPATH
+umask 022 # Set default umask
+
+###---= Locales =---###
+export LANG=it_IT.UTF-8
+export LANGUAGE=it_IT.UTF-8:en_US-UTF-8
+export LC_ALL=it_IT.UTF-8
+
+export GROFF_ENCODING=utf8
+
+###---= Paths =---###
+export PATH="$PATH:/usr/bin/core_perl:$HOME/.config/bspwm:$HOME/.scripts/:$HOME/.local/bin"
+
+###--- XDG
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CONFIG_DIRS="/usr/etc/xdg:/etc/xdg"
+
+###--- Config files: keep ~ clean!
+export GTK2_RC_FILES="$HOME/.config/gtkrc-2.0"
+export MYVIMRC="$HOME/.config/nvim/init.vim"
+
+export NPM_CONFIG_PREFIX="$HOME/.local"
+
+###--- Sockets and Buffers
+export PANEL_FIFO="/tmp/panel-fifo"
+export BSPWM_SOCKET="/tmp/bspwm-socket"
+
+###---= Preferred Applications =---###
+export CODEEDITOR="/usr/bin/code"
+export BROWSER="/usr/bin/firefox"           # Prevets xdg-open fork bomb attack
+export PBROWSER="/usr/bin/firefox --private-window"
+export EDITOR="/usr/bin/nvim"
+export VISUAL=/usr/bin/nvim
+export FILEMGR=/usr/bin/pcmanfm
+export TUIFMNGR=/usr/bin/ranger
+export TERMINAL=/usr/bin/alacritty
+export CALENDAR=/usr/bin/calcurse
+export MAIL=/usr/bin/neomutt
+export PAGER=/usr/bin/less  # I may switch to most
+
+export WM="bspwm"
+
+###--- App specific settings
+export PANEL_HEIGHT=16                        # reserve some space for the panel
+export DOTNET_CLI_TELEMETRY_OPTOUT=1          # Disable .NET telemetry
+
+# Improve the awful Java Gui
+export JAVA_FONTS=/usr/share/fonts/TTF
+export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=lcd_hrgb"
+
+export TERM=xterm-256color          # This is needed for colors to work in alacritty
+export COLORTERM="truecolor"        # tells neovim what color settings to use
+
+export QT_QPA_PLATFORMTHEME="qt5ct" # qt5 theme toolkit
+
+###---= Compiler Options =---###
+# Compile using as many parallel jobs as possible
+export njobs=`getconf _NPROCESSORS_ONLN`
+export NUMJOBS="-j$njobs"
+export MAKEFLAG="$NUMJOBS"
+
+###---= Final cleaning =---###
+unset TERMCAP # Termcap is outdated, old, and crusty, kill it.
+unset MANPATH # Man is much better than us at figuring this out
 
 #
 ##EOF##
