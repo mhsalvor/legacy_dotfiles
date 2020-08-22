@@ -28,7 +28,7 @@ alias su="/usr/bin/su"
 
 # If "lsd" is installed, use it instead of "ls"
 # define some standard options for "ls" otherwise.
-command -v lsd > /dev/null && alias ls="lsd" ||\
+command -v lsd > /dev/null && alias ls="lsd --group-dirs first" ||\
       alias ls="ls -hNCF --color=auto --group-directories-first\
             --time-style=+'%d.%m.%Y %H:%M'"
 
