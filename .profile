@@ -16,15 +16,15 @@
 ###---= Inizialiaze =---###
 # Load profiles from /etc/profile.d
 if test -d /etc/profile.d/; then
-	for profile in /etc/profile.d/*.sh; do
-		test -r "$profile" && . "$profile"
-	done
-	unset profile
+    for profile in /etc/profile.d/*.sh; do
+        test -r "$profile" && . "$profile"
+    done
+    unset profile
 fi
 
 # Source global bash config
 if test "$PS1" && test "$BASH" && test -r /etc/bash.bashrc; then
-	. /etc/bash.bashrc
+    . /etc/bash.bashrc
 fi
 
 # Source user bash config

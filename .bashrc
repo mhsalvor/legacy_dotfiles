@@ -73,22 +73,22 @@ export SAVEHIST=1 # save history regardless of number of terminals
 #stty stop undef
 #stty start undef
 
-complete -cf sudo # enable <TAB> completion with sudo
-complete -A alias	alias unalias
-complete -A command	which
-complete -A export	export printenv
-complete -A hostname	ssh telnet ftp ncftp ping dig nmap
-complete -A helptopic	help
-complete -A job -P '%'	fg jobs
-complete -A setopt	set
-complete -A shopt	shopt
-complete -A signal	kill killall
-complete -A user	su userdel passwd
-complete -A group	groupdel groupmod newgrp
-complete -A directory	cd rmdir
-complete -f -X '!*.@(gif|GIF|jpg|JPG|jpeg|JPEG|png|PNG|xcf)'	gimp
+complete -cf sudo       # enable <TAB> completion with sudo
+complete -A alias       alias unalias
+complete -A command     which
+complete -A export      export printenv
+complete -A hostname    ssh telnet ftp ncftp ping dig nmap
+complete -A helptopic   help
+complete -A job -P '%'  fg jobs
+complete -A setopt      set
+complete -A shopt       shopt
+complete -A signal      kill killall
+complete -A user        su userdel passwd
+complete -A group       groupdel groupmod newgrp
+complete -A directory   cd rmdir
+complete -f -X '!*.@(gif|GIF|jpg|JPG|jpeg|JPEG|png|PNG|xcf)' gimp
 complete -W "$(echo `cat ~/.bash_history | egrep '^ssh ' | sort | uniq | sed 's/^ssh //'`;)"\
-       	ssh # autocomplete ssh commands
+    ssh # autocomplete ssh commands
 
 #umask 022 #default file permissions rw-r--r--
 
@@ -104,15 +104,15 @@ xhost +local:root > /dev/null 2>&1
 
 # Use user defined colors if found
 [[ -x /usr/bin/dircolors ]] && eval $(dircolors -b $HOME/.dir_colors) ||\
-	eval $(dircolors -b)
+    eval $(dircolors -b)
 
 # Use bash-completion if present
 [[ -r /usr/share/bash-completion/bash_completion ]] && ! shopt -oq posix &&\
-       	source /usr/share/bash-completion/bash_completion
+    source /usr/share/bash-completion/bash_completion
 
 # same for git completion
 [[ -s /usr/share/git/completion/git-completion.bash ]] &&\
-	source /usr/share/git/completion/git-completion.bash
+    source /usr/share/git/completion/git-completion.bash
 
 # make less more friendly for non-text input files. Lists files inside archives etc...
 [[ -x /usr/bin/lesspipe.sh ]] && eval "$(SHELL=/bin/sh lesspipe.sh)"
@@ -127,27 +127,25 @@ fi
 # Fortune and some cosmetic gimmiks, ignore this unless you really want it.
 # If you are wondering, try and look from where my username cames from...
 #if [ "`id -u`" = "0" ]; then
-#	echo -e '\n\e[1;31m'\> Assuming Controll... done.'\n\n\e[0m\e[4;31m\t\t'Terminus System : Acheron Terminal'\n\n\e[0m\e[1;31m'\> Access Level:0, Welcome.'\e[0m'
+#   echo -e '\n\e[1;31m'\> Assuming Controll... done.'\n\n\e[0m\e[4;31m\t\t'Terminus System : Acheron Terminal'\n\n\e[0m\e[1;31m'\> Access Level:0, Welcome.'\e[0m'
 #else
-#	/usr/bin/fortune -a
-##	echo -e '\n\e[4;32m\t\t'Terminus System : Acheron Terminal'\n\n\e[1;0m'\> Welcome `whoami`, have a nice day.
+#   /usr/bin/fortune -a
+##  echo -e '\n\e[4;32m\t\t'Terminus System : Acheron Terminal'\n\n\e[1;0m'\> Welcome `whoami`, have a nice day.
 #fi
 
 
 # Change the window title of X terminals
 case ${TERM} in
-	xterm*|rxvt*|Eterm*|aterm|kterm|gnome*|interix|konsole*|alacritty*)
-		PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/\~}\007"'
-		;;
-	screen*)
-		PROMPT_COMMAND='echo -ne "\033_${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/\~}\033\\"'
-		;;
+    xterm*|rxvt*|Eterm*|aterm|kterm|gnome*|interix|konsole*|alacritty*)
+        PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/\~}\007"' ;;
+    screen*)
+        PROMPT_COMMAND='echo -ne "\033_${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/\~}\033\\"' ;;
 esac
 
 # Read ~/.propmtrc for custom prompt, if present, use a defaulf PS1 if not.
 selection="_default" #FOR TESTING PURPOSES ONLY! I use this to choose which variant to load
 [[ -f $HOME/.prompt.d/prompt$selection ]] &&\
-       	source $HOME/.prompt.d/prompt$selection || PS1='[ ERR \u@\h \W]\$ '
+    source $HOME/.prompt.d/prompt$selection || PS1='[ ERR \u@\h \W]\$ '
 
 # Read ~/.aliasrc for aliases
 [[ -f $HOME/.aliasrc ]] && source $HOME/.aliasrc

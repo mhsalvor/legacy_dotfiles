@@ -32,22 +32,22 @@ command -v lsd > /dev/null && alias ls="lsd --group-dirs first" ||\
       alias ls="ls -hNCF --color=auto --group-directories-first\
             --time-style=+'%d.%m.%Y %H:%M'"
 
-alias sl="ls"		# avoid annoying typos
+alias sl="ls"                   # avoid annoying typos
 alias ll="ls -l"
 alias la="ls -A"
 alias lla="ls -la"
-alias l.="ls -d .*"	# only show hidden files
-alias ldir="ls -lF | grep ^d" # list all directories in current dir.
+alias l.="ls -d .*"             # only show hidden files
+alias ldir="ls -lF | grep ^d"   # list all directories in current dir.
 alias lls=" ls -lFA | less"
 alias lt="ls --tree"
 alias llgr="ls -l . | grep"
 alias llagr="ls -la . | grep"
-alias lx="ls -lXB"	# sort by extension
-alias lk="ls -lSr"	# sort by size
-alias lc="ls -lcr"	# sort by change time
-alias lu="ls -lur"	# sort by access time
-alias lr="ls -lR"	# recursive ls
-alias lt="ls -ltr"	# sort by date
+alias lx="ls -lXB"              # sort by extension
+alias lk="ls -lSr"              # sort by size
+alias lc="ls -lcr"              # sort by change time
+alias lu="ls -lur"              # sort by access time
+alias lr="ls -lR"               # recursive ls
+alias lt="ls -ltr"              # sort by date
 
 # local dir search
 alias fhere="find . -type f -name"
@@ -58,11 +58,10 @@ alias egrep="egrep --color=auto"
 alias fgrep="fgrep --color=auto"
 
 # Use colordiff if installed
-command -v colordiff > /dev/null && alias diff="colordiff -u" ||\
-       	alias diff="diff -u --color=auto"
+command -v colordiff > /dev/null && alias diff="colordiff -u" || alias diff="diff -u --color=auto"
 
 # handy shortcuts
-alias histg="history | grep -i"	# searches in the shell history
+alias histg="history | grep -i"     # searches in the shell history
 alias h="history"
 alias j="jobs -l"
 alias path="echo -e ${PATH//:/\\n}"
@@ -70,25 +69,25 @@ alias nowtime="date +'%T'"
 alias nowdate="date +'%d-%m-%Y'"
 alias r="ranger"
 alias np="nano -w PKGBUIILD"
-alias v="$EDITOR"	# defined in ~/.bashrc
+alias v="$EDITOR"                   # defined in ~/.bashrc
 alias sv="sudo $EDITOR"
 alias ka="kilall"
-alias kc="killall conky" # quickly kill conkies
+alias kc="killall conky"            # quickly kill conkies
 alias ps="ps auxf"
 alias hw="hwinfo --short"
 alias edit="nano"
 
-alias mkdir="mkdir -pv" # creates parent directories if not present. Verbose
+alias mkdir="mkdir -pv"             # creates parent directories if not present. Verbose
 alias mv="mv -vi"
-alias pmv="mv -vn"	# no clobber: don't overwrtite exixting files
-alias cp="cp -vi"	# confirm before overwriting something
-alias ln="ln -vi"	# confirm before removing existing destination
-alias rm="rm -vI --preserve-root" # do not delete /; prompt if deleting more then 3 files
-alias srm="shred -vuz"	# safe file removal (no recovery!)
-alias explore="$FILEMNGR ." # open current dir in a grafical fm, defined in ~/.bashrc
-alias suexplore="sudo $FILEMNGR ." # open current dir in a su instance of a X fm
-# opens a file with whatever program would open by double clicking it in a Gui fm
-alias try="xdg-open"
+alias pmv="mv -vn"                  # no clobber: don't overwrtite exixting files
+alias cp="cp -vi"                   # confirm before overwriting something
+alias ln="ln -vi"                   # confirm before removing existing destination
+alias rm="rm -vI --preserve-root"   # do not delete /; prompt if deleting more then 3 files
+alias srm="shred -vuz"              # safe file removal (no recovery!)
+alias explore="$FILEMNGR ."         # open current dir in a grafical fm, defined in ~/.bashrc
+alias suexplore="sudo $FILEMNGR ."  # open current dir in a su instance of a X fm
+alias try="xdg-open"                # opens a file with whatever program would open by
+                                    # double clicking it in a Gui fm
 alias which="type -all"
 
 # Parenting changing perms on /
@@ -103,20 +102,20 @@ alias halt="sudo /sbin/halt"
 alias shutdown="sudo /sbin/shutdown"
 
 # A quick way to get out of current direcoty
-alias cd..="cd .."	# avoid annoying typos
+alias cd..="cd .."                  # avoid annoying typos
 alias ..="cd .."
 alias ..2="cd ../../"
 alias ..3="cd ../../../"
 alias ..4="cd ../../../../"
 alias ..5="cd ../../../../../"
 
-alias free="free -ht"	   # human-readable sizes, total entry
+alias free="free -ht"                       # human-readable sizes, total entry
 alias meminfo="free -m -l -t"
-alias du="du -ach | sort -h"	# sort by size
-alias df="df -Tha --total | column -t" # human-readable sizes
-alias mount="mount | column -t"	# a more readeable output
+alias du="du -ach | sort -h"                # sort by size
+alias df="df -Tha --total | column -t"      # human-readable sizes
+alias mount="mount | column -t"             # a more readeable output
 
-alias more="less"	# more is less
+alias more="less"                           # more is less
 alias ccat="highlight --out-format=ansi"
 
 # search for a process, order the output for virtual memory usage
@@ -132,16 +131,16 @@ alias psmem10="ps auxf | sort -nr -k 4 | head -10"
 alias pscpu="ps auxf | sort -nr -k 3"
 alias pscpu10="ps auxf | sort -nr -k 3 | head -10"
 
-alias wget="wget -c"	# always resume downloads
+alias wget="wget -c"    # always resume downloads
 
 ### Networking
-alias myip="curl http://ipecho.net/plain; echo"	#shows my pubblic IP
+alias myip="curl http://ipecho.net/plain; echo"     #shows my pubblic IP
 #PING:
-alias ping="ping -c 5"	# stop after sending _count_ ECHO_REQUEST packets
-alias fastping="ping -c 100 -s.2"  # Do not wait 1 second, go fast
+alias ping="ping -c 5"                              # stop after sending _count_ ECHO_REQUEST packets
+alias fastping="ping -c 100 -s.2"                   # Do not wait 1 second, go fast
 #PORTS, FIREWALL, IPTABLE:
-alias ports="netstat -tulanp"	#show my ports
-alias ipt="sudo /sbin/iptables"	# sortcut for iptables and pass it via sudo
+alias ports="netstat -tulanp"                       #show my ports
+alias ipt="sudo /sbin/iptables"                     # sortcut for iptables and pass it via sudo
 # display all rules
 alias iptlist="sudo /sbin/iptables -L -n -v --line-numbers"
 alias iptlistin="sudo /sbin/iptables -L INPUT -n -v --line-numbers"
@@ -153,7 +152,7 @@ alias firewall="iptlist"
 alias iwconfig="iwconfig wlp3s0"
 
 # Utilities
-alias bc="bc -lq"	# a quick calculator
+alias bc="bc -lq"                   # a quick calculator
 alias sha1="openssl sha1"
 
 # pacman
@@ -167,7 +166,7 @@ alias update="pacman -Syyu"
 alias cleanup='pacman -Rns $(pacman -Qtdq)' # cleanup orphaned packages
 alias unlock="sudo rm /var/lib/pacman/db.lck"
 alias fixit="sudo rm -f /var/lib/pacman/db.lck && sudo pacman-mirrors -g &&\
-       	sudo pacman -Syyuu && sudo pacman -Suu" # fix pacman DB
+    sudo pacman -Syyuu && sudo pacman -Suu"     # fix pacman DB
 
 # yay as aur helper - updates everything
 alias yayup="yay -Syu --noconfirm"
@@ -185,13 +184,13 @@ alias ralias="source ~/.aliasrc"
 alias rprofile="source ~/.profile"
 alias rall="source ~/.bashrc ~/.aliasrc ~/.profile"
 
-alias bashrc=" v ~/.bashrc"
-alias aliasrc="v ~/.aliasrc"
-alias profilerc="v ~/.profile"
-alias vimrc="v ~/.config/nvim/init.vim"
+alias v.bashrc=" v ~/.bashrc"
+alias v.aliasrc="v ~/.aliasrc"
+alias v.profile="v ~/.profile"
+alias v.vimrc=" ~/.config/nvim/init.vim"
 
-alias grbash=" cat ~/.bashrc | grep -i"
-alias gralias="cat ~/.aliasrc | grep -i"
+alias grbashrc=" cat ~/.bashrc | grep -i"
+alias graliasrc="cat ~/.aliasrc | grep -i"
 alias grprofile="cat ~/.profile | grep -i"
 
 # dotnet is annoying
@@ -217,8 +216,7 @@ alias gpg-retrieve="gpg2 --keyserver-options auto-key-retrieve --receive-keys"
 
 ### Backup / Reset / Skel
 # copy/paste all content of /etc/skel over to $HOME - create a backup of config - beware
-alias skel='cp -Rf ~/.config ~/.config-backup-$(date +%Y.%m.%d-%H.%M.%S)\
-	cp -rf /etc/skel/* ~'
+alias skel='cp -Rf ~/.config ~/.config-backup-$(date +%Y.%m.%d-%H.%M.%S) cp -rf /etc/skel/* ~'
 # backup of /etc/skel to hidden backup folder in /home/<user>
 alias bupskel='cp -Rf /etc/skel ~/.skel-backup-$(date +%Y.%m.%d-%H.%M.%S)'
 
@@ -228,56 +226,54 @@ alias bupskel='cp -Rf /etc/skel ~/.skel-backup-$(date +%Y.%m.%d-%H.%M.%S)'
 #
 ## extract - archive extractor
 ## usage: extract <file>
-function extract()
-{
-  if [ -f $1 ] ; then
-	# display usage if no paramaters given
-	echo "Usage: extract <path/file_name_1> [path/file_name_2] ..."
-	return 1
-  else
-     for n in $@
-     do
-	if [ -f "$n" ] ; then
-	   case "${n%,}" in
-		*.tar.bz2)	tar xjf "$n" ;;
-		*.tar.gz)	tar xfz "$n" ;;
-		*.tar.xz)	tar xvf "$n" ;;
-		*.tar)		tar xvf "$n" ;;
-		*.lzma)		unlzma ./"$n" ;;
-		*.bz2)		bunzip2 ./"$n" ;;
-		*.rar)		unrar x -ad ./"$n" ;;
-		*.gz)		gunzip  ./"$n" ;;
-		*.tbz2)		tar xjf "$n" ;;
-		*.tgz)		tar xzf "$n" ;;
-		*.txz)		tar xvf "$n" ;;
-		*.zip)		unzip ./"$n" ;;
-		*.7z)		7z x ./"$n" ;;
-		*.arj)		7z x ./"$n" ;;
-		*.cab)		7z x ./"$n" ;;
-		*.chm)		7z x ./"$n" ;;
-		*.deb)		ar x ./"$n" ;;
-		*.dmg)		7z x ./"$n" ;;
-		*.iso)		7z x ./"$n" ;;
-		*.lzh)		7z x ./"$n" ;;
-		*.msi)		7z x ./"$n" ;;
-		*.rpm)		7z x ./"$n" ;;
-		*.udf)		7z x ./"$n" ;;
-		*.wim)		7z x ./"$n" ;;
-		*.xar)		7z x ./"$n" ;;
-		*.xz)		unxz ./"$n" ;;
-		*.exe)		cabextract ./"$n" ;;
-		*.z)		uncompress ./"$n" ;;
-		*.Z)		uncompress ./"$n" ;;
-		*)		echo "extract: '$n' -  unknown archive method"
-		       		return 1
-				;;
-	  esac
-     else
-	echo "'$n' - is not a valid file or does not exist."
-	return 1
-     fi
-   done
- fi
+function extract() {
+    if [ -f $1 ] ; then
+        # display usage if no paramaters given
+        echo "Usage: extract <path/file_name_1> [path/file_name_2] ..."
+        return 1
+    else
+        for n in $@
+        do
+            if [ -f "$n" ] ; then
+                case "${n%,}" in
+                    *.tar.bz2)  tar xjf "$n" ;;
+                    *.tar.gz)   tar xfz "$n" ;;
+                    *.tar.xz)   tar xvf "$n" ;;
+                    *.tar)      tar xvf "$n" ;;
+                    *.lzma)     unlzma ./"$n" ;;
+                    *.bz2)      bunzip2 ./"$n" ;;
+                    *.rar)      unrar x -ad ./"$n" ;;
+                    *.gz)       gunzip  ./"$n" ;;
+                    *.tbz2)     tar xjf "$n" ;;
+                    *.tgz)      tar xzf "$n" ;;
+                    *.txz)      tar xvf "$n" ;;
+                    *.zip)      unzip ./"$n" ;;
+                    *.7z)       7z x ./"$n" ;;
+                    *.arj)      7z x ./"$n" ;;
+                    *.cab)      7z x ./"$n" ;;
+                    *.chm)      7z x ./"$n" ;;
+                    *.deb)      ar x ./"$n" ;;
+                    *.dmg)      7z x ./"$n" ;;
+                    *.iso)      7z x ./"$n" ;;
+                    *.lzh)      7z x ./"$n" ;;
+                    *.msi)      7z x ./"$n" ;;
+                    *.rpm)      7z x ./"$n" ;;
+                    *.udf)      7z x ./"$n" ;;
+                    *.wim)      7z x ./"$n" ;;
+                    *.xar)      7z x ./"$n" ;;
+                    *.xz)       unxz ./"$n" ;;
+                    *.exe)      cabextract ./"$n" ;;
+                    *.z)        uncompress ./"$n" ;;
+                    *.Z)        uncompress ./"$n" ;;
+                    *) echo "extract: '$n' -  unknown archive method"
+                        return 1 ;;
+                esac
+            else
+                echo "'$n' - is not a valid file or does not exist."
+                return 1
+            fi
+        done
+    fi
 }
 ######
 
@@ -285,32 +281,27 @@ function extract()
 ## colors - prints the current shell colorscheme for quick reference.
 ## usage: colors
 ##
-function colors()
-{
-	local fgc bgc vals seq0
-
-	printf "Color escapes are %s\n" '\e[${value};...;${value}m'
-	printf "Values 30..37 are \e[33mforeground colors\e[m\n"
-	printf "Values 40..47 are \e[43mbackground colors\e[m\n"
-	printf "Value 1 gives a \e[1mbold-faced look\e[m\n\n"
-
-	# foreground colors
-	for fgc in {30..37}; do
-		# background colors
-		for bgc in {40..47}; do
-			fgc=${fgc#37} # white
-			bgc=${bgc#40} # black
-
-			vals="${fgc:+$fgc;}${bgc}"
-			vals=${vals%%;}
-
-			seq0="${vals:+\e[${vals}m}"
-			printf " %-9s" "${seq0:-(default)}"
-			printf " ${seq0}TEXT\e[m"
-			printf " \e[${vals:+${vals+$vals;}}1mBOLD\e[m"
-		done
-		echo; echo
-	done
+function colors() {
+    local fgc bgc vals seq0
+    printf "Color escapes are %s\n" '\e[${value};...;${value}m'
+    printf "Values 30..37 are \e[33mforeground colors\e[m\n"
+    printf "Values 40..47 are \e[43mbackground colors\e[m\n"
+    printf "Value 1 gives a \e[1mbold-faced look\e[m\n\n"
+    # foreground colors
+    for fgc in {30..37}; do
+        # background colors
+        for bgc in {40..47}; do
+            fgc=${fgc#37}   # white
+            bgc=${bgc#40}   # black
+            vals="${fgc:+$fgc;}${bgc}"
+            vals=${vals%%;}
+            seq0="${vals:+\e[${vals}m}"
+            printf " %-9s" "${seq0:-(default)}"
+            printf " ${seq0}TEXT\e[m"
+            printf " \e[${vals:+${vals+$vals;}}1mBOLD\e[m"
+        done
+        echo; echo
+    done
 }
 ######
 
@@ -327,11 +318,10 @@ function vf() { fzf | xargs -r -I % $EDITOR % ;}
 ## chext - remane *.foo to *.bar
 ## usage: chext *.foo *.bar
 ##
-function chext()
-{
-	for f in *.$1; do
-		mv $f ${f%$1}$2
-	done
+function chext() {
+    for f in *.$1; do
+        mv $f ${f%$1}$2
+    done
 }
 ######
 
@@ -339,23 +329,22 @@ function chext()
 ## lowercase - move filenames to lowercase
 ## usage: lowercase <filename>
 ##
-function lowercase()
-{
-	for file ; do
-		filename=${file##*/}
-		case "$filename" in
-			*/*)	dirname==${file%/*} ;;
-			*)	dirname=. ;;
-		esac
-		nf=$(echo $filename | tr A-Z a-z)
-		newname="${dirname}/${nf}"
-		if [ "$nf" != "$filename" ]; then
-			mv "$file" "$newname"
-			echo "lowercase: $file --> $newname"
-		else
-			echo "lowercase: $file not changed."
-		fi
-	done
+function lowercase() {
+    for file ; do
+        filename=${file##*/}
+        case "$filename" in
+            */*) dirname==${file%/*} ;;
+            *) dirname=. ;;
+        esac
+        nf=$(echo $filename | tr A-Z a-z)
+        newname="${dirname}/${nf}"
+        if [ "$nf" != "$filename" ]; then
+            mv "$file" "$newname"
+            echo "lowercase: $file --> $newname"
+        else
+            echo "lowercase: $file not changed."
+        fi
+    done
 }
 ######
 
@@ -363,12 +352,11 @@ function lowercase()
 ## nameswap - swap 2 filenames around
 ## usage: nameswap <file1> <file2>
 ##
-function nameswap()
-{
-	local TEMPFILE=tmp.$$
-	mv $1 $TEMPFILE
-	mv $2 $1
-	mv $TEMPFILE $2
+function nameswap() {
+    local TEMPFILE=tmp.$$
+    mv $1 $TEMPFILE
+    mv $2 $1
+    mv $TEMPFILE $2
 }
 ######
 
@@ -376,24 +364,20 @@ function nameswap()
 ## lsarch - view archive content without extracting it
 ## usage: lsarch <archive>
 ##
-function lsarch()
-{
-	if [ -f $1 ]; then
-		case $1 in
-			*.tar.gz)	gunzip -c $1 | tar -tf - -- ;;
-			*.tar)		tar -tf $1 ;;
-			*.tgz)		tar -ztf $1 ;;
-			*.zip)		unzip -l $1 ;;
-			*)		echo "lsarch: '$1' Error. Cannot read archive" ;;
-		esac
-	else
-		echo "lsarch: '$1' is not a valid archive"
-	fi
+function lsarch() {
+    if [ -f $1 ]; then
+        case $1 in
+            *.tar.gz)   gunzip -c $1 | tar -tf - -- ;;
+            *.tar)      tar -tf $1 ;;
+            *.tgz)      tar -ztf $1 ;;
+            *.zip)      unzip -l $1 ;;
+            *) echo "lsarch: '$1' Error. Cannot read archive" ;;
+        esac
+    else
+        echo "lsarch: '$1' is not a valid archive"
+    fi
 }
 ######
-
-
-
 ######
 #<======= Deprecated / Other Distro / Experimental ===========================>
 #

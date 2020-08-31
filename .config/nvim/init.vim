@@ -31,10 +31,10 @@
 " this one file.
 " Credits: https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
 if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
-	silent !mkdir -p ~/.local/share/nvim/bundle
-	silent !mkdir -p ~/.local/share/nvim/undo
+    silent !mkdir -p ~/.local/share/nvim/bundle
+    silent !mkdir -p ~/.local/share/nvim/undo
     silent !sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 " Plugin list and Installation.
 " All Plugins must appear between plug#begin() and plug#end()
@@ -53,6 +53,7 @@ Plug 'RRethy/vim-hexokinase', {'do': 'make hexokinase'} " Async color preview
 Plug 'tpope/vim-surround'     " Change surrounding symbols
 Plug 'vimwiki/vimwiki'
 Plug 'junegunn/goyo.vim'
+Plug 'Yggdroot/indentLine'  " show indentations
 
 "" Code completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}  " coc-vim
@@ -65,9 +66,9 @@ Plug 'baskerville/vim-sxhkdrc'    " Simple X Hotkey Daemon config file
 "" Files search, navigation and manipulation
 Plug 'junegunn/fzf.vim'    " fuzzy file finder
 Plug 'preservim/nerdtree'  " NERDTree - a tree explorer plugin for vim
-Plug 'Xuyuanp/nerdtree-git-plugin' " git support for NERDTree
-Plug 'ryanoasis/vim-devicons'     " enables devicons - needs to be After NERDTree-git
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight' " syntax highlight for NERDTree
+    Plug 'Xuyuanp/nerdtree-git-plugin' " git support for NERDTree
+    Plug 'ryanoasis/vim-devicons'     " enables devicons - needs to be After NERDTree-git
+    Plug 'tiagofumo/vim-nerdtree-syntax-highlight' " syntax highlight for NERDTree
 "Plug 'francoiscabrol/ranger.vim'     " Ranger integration
 
 "" Git
@@ -86,7 +87,6 @@ set clipboard+=unnamedplus " use the system clipboard for copy-paste
 set wildmode=longest,list,full  " Adjust autocompletion behavior
 set noshowmode  " don't show mode info below the statusline, only show them once
 set termguicolors " make nvim use truecolors
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Key mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -113,8 +113,8 @@ cmap w!! w !sudo tess > /dev/null %
 vnoremap <C-c> "*y : let @+=@*<CR>  " copy to both the clipboard and primary selection
 map <C-p> "+P   " paste where the cursor is
 
-" Spell check 'o' as in orthografy
-map <leader>o :setlocal spell! spellang=it
+" Spell check 'o' as in orthography
+map <leader>o :setlocal spell! spelllang=it
 
 " Replace All is aliaset to S
 nnoremap S :%s//g<left><left>
@@ -153,24 +153,25 @@ let g:airline#extensions#hunks#non_zero_only =1
 let g:airline_theme = 'sonokai'    " use sonokai theme
 
 "" Theme - Sonokai Maia
-let g:sonokai_style = 'maia'    " select the style for sonokai
-let g:sonokai_enable_italic = 0 " toggle italic keywords
-let g:sonokai_disable_italic_comment = 0    " toggle italic for comments
-let g:sonokai_transparent_background = 0    " toggle transparent background
-let g:sonokai_sign_column_background = 'none' " set the background for signcolumn
-let g:sonokai_better_performance = 1    " reduce loading times
+let g:sonokai_style = 'maia'                    " select the style for sonokai
+let g:sonokai_enable_italic = 0                 " toggle italic keywords
+let g:sonokai_disable_italic_comment = 0        " toggle italic for comments
+let g:sonokai_transparent_background = 0        " toggle transparent background
+let g:sonokai_sign_column_background = 'none'   " set the background for signcolumn
+let g:sonokai_better_performance = 1            " reduce loading times
 colorscheme sonokai
 
 "" Interface tweaking
-set hidden          " hide when switching buffers, don't unload
-set colorcolumn=81	" show a line on column 80
-set scrolloff=5     " Always show 5 lines above and below the cursor
-set number		    " enable line numbers
-set relativenumber	" make them relative to current line
-set splitbelow splitright " adjust were splits go
-set cursorline      " highlight cursor line
-set cursorcolumn    " highlight cursor column
-set nohlsearch      " turn off permanent highlighting of search results
+set hidden                  " hide when switching buffers, don't unload
+set colorcolumn=81          " show a line on column 80
+set scrolloff=5             " Always show 5 lines above and below the cursor
+set number                  " enable line numbers
+set relativenumber          " make them relative to current line
+set splitbelow splitright   " adjust were splits go
+set cursorline              " highlight cursor line
+set cursorcolumn            " highlight cursor column
+set nohlsearch              " turn off permanent highlighting of search results
+set list listchars=tab:▸·
 
 "" Improved searches
 set ignorecase      " case insensitive searching
@@ -179,11 +180,13 @@ set path+=**        " search current directory recursively
 
 "" Text tweaks
 " 1 TAB == 4 Spaces
-set expandtab		" use spaces instead of tabs
-set shiftwidth=4	" spaces when auto indenting
-set tabstop=4		" spaces for <Tab> and <BS>
+set expandtab           " use spaces instead of tabs
+set shiftwidth=4        " spaces when auto indenting
+set softtabstop=4       " spaces fot <Tab> and <BS>
+set tabstop=8           " size of the TAB character, 8 is the legacy safe value.
 
 set nowrap          " disable word wrap
+set autoindent      " enable autoindent
 set smartindent     " do smart auto indent when starting a new line
 set showmatch       " show bracket matches
 
@@ -226,14 +229,14 @@ set signcolumn=yes
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+            \ pumvisible() ? "\<C-n>" :
+            \ <SID>check_back_space() ? "\<TAB>" :
+            \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
 " Use <c-space> to trigger completion.
@@ -243,9 +246,9 @@ inoremap <silent><expr> <c-space> coc#refresh()
 " position. Coc only does snippet and additional edit on confirm.
 " <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
 if exists('*complete_info')
-  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+    inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
 else
-  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+    inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 endif
 
 " Use `[g` and `]g` to navigate diagnostics
@@ -263,11 +266,11 @@ nmap <silent> gr <Plug>(coc-references)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
+    if (index(['vim','help'], &filetype) >= 0)
+        execute 'h '.expand('<cword>')
+    else
+        call CocAction('doHover')
+    endif
 endfunction
 
 " Highlight the symbol and its references when holding the cursor.
@@ -281,11 +284,11 @@ xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 
 augroup mycocgroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder.
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+    autocmd!
+    " Setup formatexpr specified filetype(s).
+    autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+    " Update signature help on jump placeholder.
+    autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
 " Applying codeAction to the selected region.
@@ -351,11 +354,11 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " Searches git repositories
 nnoremap <A-g> :GFiles<CR>
 command! -bang -nargs=? -complete=dir GFiles
-        \call fzf#vim#gfiles(<q-args>, {'options': ['--preview', 'preview {}']}, <bang>0)
+            \call fzf#vim#gfiles(<q-args>, {'options': ['--preview', 'preview {}']}, <bang>0)
 " Searches filesystem
 nnoremap <A-z> :Files<CR>
 command! -bang -nargs=? -complete=dir Files
-        \ call fzf#vim#files(<q-args>, {'options': ['--preview', 'preview {}']}, <bang>0)
+            \ call fzf#vim#files(<q-args>, {'options': ['--preview', 'preview {}']}, <bang>0)
 " Preview windows preferences
 let g:fzf_preview_window = 'right:60%'  "split right, 60% size of main split
 "----end vim fzf
@@ -370,8 +373,8 @@ map <C-f> :NERDTreeToggle<Cr>
 
 "" nerdtree-git-plugin
 " use nerdfonts
-let g:NERDTreeGitStatusUseNerdFonts = 1 " you should install nerdfonts!
-let NERDTreeMinimalUI = 0 " use a minimalist UI if 1, hides ? help
+let g:NERDTreeGitStatusUseNerdFonts = 1     " you should install nerdfonts!
+let NERDTreeMinimalUI = 0       " use a minimalist UI if 1, hides ? help
 "----end NERDTree
 
 ""-------------------vim-hexokinase--------------------------------------------
@@ -414,6 +417,11 @@ autocmd BufRead,BufNewFile /tmp/neomutt* :Goyo \| set bg=light
 
 "---end goyo
 
+"---- Indentline
+"let g:indentLine_setColors = 0 " Use the colorscheme colors
+let g:indentLine_char = '·'
+"let g:indentLine_setConceal = 0     " don't change conceal settings
+"-----------end Indentline
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Filetype specific options
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -554,7 +562,6 @@ cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 autocmd BufWritePost *sxhkdrc !pkill -USR1 sxhkd
 " Run xrdb whenever Xdefaults or Xresources are updated.
 autocmd BufWritePost *Xresources,*Xdefaults !xrdb %
-
 
 "
 """"EOF""""
